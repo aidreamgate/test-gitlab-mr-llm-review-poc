@@ -8,7 +8,7 @@ class AIAnalyzer:
         print(f"api_version: {api_version}, api_endpoint: {api_endpoint}, api_key: {api_key}")
         
         self.client = AzureOpenAI(
-            api_version=api_version
+            api_version=api_version,
             api_key=api_key,
             azure_endpoint=api_endpoint
         )
