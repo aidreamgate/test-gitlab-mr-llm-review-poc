@@ -14,7 +14,7 @@ OPENAI_API_ENDPOINT = os.environ.get("OPENAI_API_ENDPOINT", "")
 OPENAI_API_VERSION = os.environ.get("OPENAI_API_VERSION", "")
 
 gitlab_client = GitlabClient(GITLAB_URL, GITLAB_TOKEN)
-ai_analyzer = AIAnalyzer(OPENAI_API_KEY, OPENAI_API_ENDPOINT, OPENAI_API_MODEL, OPENAI_API_VERSION)
+ai_analyzer = AIAnalyzer(OPENAI_API_KEY, OPENAI_API_ENDPOINT, OPENAI_API_VERSION)
 
 def analyze_all_projects():
     for project in PROJECTS:
