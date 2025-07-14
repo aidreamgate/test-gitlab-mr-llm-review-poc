@@ -1,11 +1,17 @@
 import json
 
 from openai import OpenAI
+from openai import AzureOpenAI
 
 class AIAnalyzer:
-    def __init__(self, api_key: str):
-        print("OPEN AI : ", api_key)
-        self.client = OpenAI(api_key=api_key)
+    def __init__(self, api_key: str, api_endpoint: str, api_version: str):
+        print(f"api_version: {api_version}, api_endpoint: {api_endpoint}, api_key: {api_key}")
+        
+        self.client = AzureOpenAI(
+            api_version=api_version
+            api_key=api_key,
+            azure_endpoint=api_endpoint
+        )
 
     def analyze_mr(self, mr_data, mr_diff):
         diff_text = "\n".join([diff["diff"] for diff in mr_diff])
@@ -44,6 +50,7 @@ class AIAnalyzer:
                 },
                 {"role": "user", "content": prompt},
             ],
+            temperature=0.0
         )
 
         analysis_markdown = response.choices[0].message.content.strip()

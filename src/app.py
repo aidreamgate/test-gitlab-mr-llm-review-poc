@@ -1,18 +1,20 @@
 from fastapi import FastAPI, HTTPException, Request
 from gitlab_client import GitlabClient
-from test_ai_analyzer import AIAnalyzer
+from ai_analyzer import AIAnalyzer
 import os
 
 app = FastAPI(title="GitLab MR Review API")
 
 GITLAB_URL = "https://gitlab.com/api/v4"
 GITLAB_TOKEN = os.environ.get("GITLAB_TOKEN", "")
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 PROJECTS = [{"id": os.environ.get("GITLAB_PROJECT_ID", ""), "name": "Mr Review Bot Poc"}]
 
-gitlab_client = GitlabClient(GITLAB_URL, GITLAB_TOKEN)
-ai_analyzer = AIAnalyzer(OPENAI_API_KEY)
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
+OPENAI_API_ENDPOINT = os.environ.get("OPENAI_API_ENDPOINT", "")
+OPENAI_API_VERSION = os.environ.get("OPENAI_API_VERSION", "")
 
+gitlab_client = GitlabClient(GITLAB_URL, GITLAB_TOKEN)
+ai_analyzer = AIAnalyzer(OPENAI_API_KEY, OPENAI_API_ENDPOINT, OPENAI_API_MODEL, OPENAI_API_VERSION)
 
 def analyze_all_projects():
     for project in PROJECTS:
